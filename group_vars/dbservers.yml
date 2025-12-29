@@ -1,21 +1,22 @@
-# Use correct Python on Amazon Linux 2023
-ansible_python_interpreter: /usr/bin/python3.9
+---
+# 1. Fix Python Path for Ubuntu (Auto-detects /usr/bin/python3)
+ansible_python_interpreter: /usr/bin/python3
 
-# Tell Ansible MySQL modules to use PyMySQL
-mysql_python_package: PyMySQL
-mysql_python_executable: /usr/bin/python3.9
+# 2. Tell Ansible MySQL modules to use PyMySQL
+mysql_python_package: python3-pymysql
+mysql_python_executable: /usr/bin/python3
 
-# MySQL / MariaDB configuration
+# 3. MySQL / MariaDB configuration
 mysql_user_home: /root
 mysql_root_home: /root
 
-# Secure installation options
+# 4. Correct Variable Mapping
+# This looks for 'vault_mysql_root_password' in your vault.yml
 mysql_root_password: "{{ vault_mysql_root_password }}"
 
 mysql_remove_anonymous_users: true
 mysql_remove_test_database: true
 mysql_disallow_root_login_remotely: true
 
-# Bind MySQL to all interfaces (optional – change if needed)
+# Bind MySQL to all interfaces
 mysql_bind_address: "0.0.0.0"
-

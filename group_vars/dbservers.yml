@@ -1,0 +1,21 @@
+# Use correct Python on Amazon Linux 2023
+ansible_python_interpreter: /usr/bin/python3.9
+
+# Tell Ansible MySQL modules to use PyMySQL
+mysql_python_package: PyMySQL
+mysql_python_executable: /usr/bin/python3.9
+
+# MySQL / MariaDB configuration
+mysql_user_home: /root
+mysql_root_home: /root
+
+# Secure installation options
+mysql_root_password: "{{ vault_mysql_root_password }}"
+
+mysql_remove_anonymous_users: true
+mysql_remove_test_database: true
+mysql_disallow_root_login_remotely: true
+
+# Bind MySQL to all interfaces (optional – change if needed)
+mysql_bind_address: "0.0.0.0"
+
